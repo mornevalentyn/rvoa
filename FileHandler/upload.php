@@ -46,7 +46,8 @@ if ($uploadOk == 0) {
         $col = $database->ResourcesTest;
         
          $document = array( 
-        "Username" => $user, 
+        "Username" => $user,
+             "UserID" => $_SESSION['id'],
         "Resource Name" => $Rname2, 
         "Resource Size" => $fsize,
          "Resource Dir" => $target_dir,

@@ -159,9 +159,10 @@
 
            $collection->insert($document);
                 
-                $userName = $collection->findOne(array("email"=>$email),array("First Name"));
+                $userName = $collection->findOne(array("email"=>$email));
                 
                 $_SESSION["name"]=$userName["First Name"];
+                $_SESSION["surname"]=$userName["Last Name"];
                  $_SESSION["email"]=$email;
                 $_SESSION["id"]=$userName["_id"];
                 header("refresh:0.5;url=main.php");
@@ -183,9 +184,10 @@
             if($verifyPwd){
                // echo "password correct";
                      /* Redirect browser */
-                $userName = $collection->findOne(array("email"=>$emailL),array("First Name"));
+                $userName = $collection->findOne(array("email"=>$emailL));
                 //print_r($userName["First Name"]);
                 $_SESSION["name"]=$userName["First Name"];
+                 $_SESSION["surname"]=$userName["Last Name"];
                 $_SESSION["email"]=$emailL;
                 $_SESSION["id"]=$userName["_id"];
                 header("refresh:0;url=main.php");

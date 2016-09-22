@@ -112,6 +112,7 @@ if (headers_sent()) {
         flush();
         ob_clean();
         readfile($zip_name);
+        unlink($zip_name);
         exit;
         
     }

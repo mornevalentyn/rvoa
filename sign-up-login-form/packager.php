@@ -56,7 +56,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div>
         <h3>
             <?php
-            makeFileList($_SESSION['name']);
+            makeFileList($_SESSION['name'], "Package");
             ?>
         </h3>
     
