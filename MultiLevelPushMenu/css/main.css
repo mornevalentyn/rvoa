@@ -1,0 +1,35 @@
+.w3-container.w3-blue.w3-center.w3-padding-128 {
+    background: linear-gradient(
+        rgba(155, 155, 155, 0.3),
+        rgba(155, 155, 155, 0.3)
+        ),
+        url(../img/background.jpg), 
+        no-repeat center bottom;
+}
+.w3-container.w3-red.w3-center.w3-padding-128 {
+    background: linear-gradient(
+        rgba(155, 155, 155, 0.3),
+        rgba(155, 155, 155, 0.3)
+        ),
+        url(../img/background.jpg), 
+        no-repeat center bottom;
+}
+
+.w3-margin.w3-text-black.w3-jumbo{
+	  text-shadow:
+    		-1px -1px 0 #fff,
+    		1px -1px 0 #fff,
+    		-1px 1px 0 #fff,
+   		 1px 1px 0 #fff	; 
+
+}
+
+body {
+    background-color: rgb(217,227,255);
+}
+
+table 
+{
+    table-layout:fixed;
+    width:100%;
+}

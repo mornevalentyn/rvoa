@@ -55,3 +55,4 @@ foreach ($files as $fil) {
   }
 }
 $zip->close();
+?>

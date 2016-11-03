@@ -1,0 +1,181 @@
+.headerBack{
+       background: linear-gradient(
+        rgba(155, 155, 155, 0),
+        rgba(155, 155, 155, 0)
+        ),
+        url(../img/background.jpg), 
+        no-repeat center bottom;
+    background-size: 100% auto;
+    background-attachment: fixed;
+        width: 100%;
+        height: auto;
+        margin-bottom: 0;
+}
+
+.navbar {
+  border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+}
+.navbar
+{
+/*    background-color: #CCCCCC;*/
+
+border-bottom: 5px solid #00b36b;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus{
+        border-top: 5px solid #00cc7a;
+      border-left: 2px solid #00cc7a;
+    border-top-left-radius: 15px !important;
+     border-top-right-radius: 15px !important;
+/*    background-color: #00cc7a;*/
+    color: #FFF;
+    text-shadow: 0 0 2px #FFF;
+}
+.navbar-inverse .navbar-nav > .active >a:hover {
+       border-top: 5px solid #00cc7a;
+      border-left: 2px solid #00cc7a;
+    border-top-left-radius: 15px !important;
+     border-top-right-radius: 15px !important;
+    background-color: #00b36b;
+    color: #FFF;
+    text-shadow: 0 0 2px #FFF;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+          border-top: 5px solid #00cc7a;
+      border-left: 2px solid #00cc7a;
+    border-top-left-radius: 15px !important;
+     border-top-right-radius: 15px !important;
+/*    background-color: #00cc7a;*/
+    color: #FFF;
+    text-shadow: 0 0 2px #FFF;
+}
+
+.navbar-inverse .navbar-nav > .active >a{
+    border-top: 5px solid #00b36b;
+      border-left: 2px solid #00b36b;
+   background-color: #00b36b;
+    border-top-left-radius: 15px !important;
+     border-top-right-radius: 15px !important;
+/*      background-color: #00b36b;*/
+    color: #FFF;
+    text-shadow: 0 0 1px #FFF;
+}
+.navbar-inverse .navbar-brand .active {
+     background-color: #00cc7a;
+    color: #FFF;
+    text-shadow: 0 0 1px #FFF;
+}
+
+h1.title, .title{
+    color: white;
+}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+    opacity: 1;
+}
+
+.btn-primary{
+    background-color: #339966;
+    opacity: 1;
+}
+
+.btn-primary:hover{
+    background-color: #00b36b;
+    text-shadow: 0 0 4px #FFF;
+    opacity: 1;
+    
+}
+
+.input{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    opacity: 1;
+}
+
+table, td{
+    border: 1px solid black;
+    width: 100%;
+    opacity: 1;
+} 
+
+td.check{
+    width: 7%;
+    text-align: center;
+    vertical-align: top;
+    height: 30px;
+    opacity: 1;
+}
+td.name{
+    width: 93%;
+    text-align:left;
+    vertical-align: top;
+    height: 30px;
+    opacity: 1;
+}
+
+.name2{
+    padding-left: 10px;
+    opacity: 1;
+}
+
+td.check2{
+    width: 7%;
+    text-align: center;
+    vertical-align: top;
+    height: 30px;
+    opacity: 1;
+}
+td.name3{
+    width: 53%;
+    text-align:left;
+    vertical-align: top;
+    height: 30px;
+    opacity: 1;
+}
+
+.name4{
+    width: 40%;
+    padding-left: 10px;
+    opacity: 1;
+}
+.name5{
+    padding-left: 10px;
+    opacity: 1;
+}
+
+
+body{
+       background: linear-gradient(
+        rgba(155, 155, 155, 0.3),
+        rgba(155, 155, 155, 0.3)
+        ),
+        url(../img/background.jpg), 
+        no-repeat center bottom;
+        background-size: 100% auto;
+        background-attachment: fixed;
+}
+
+
+
+
