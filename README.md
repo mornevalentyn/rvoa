@@ -13,4 +13,13 @@ Source Code for RVOA honours project
  
  After this the code should be ready to work :)
  
+ Remember before running the code, you need to start MongoDB:
+ Open command prompt and change directory (cd) to the bin folder located inside the MongoDB folder. 
+ (most times its path\MongoDB\Server\[version]\bin)
+ Once there you can start up the database with the following command
+ 
+ mongod --dbpath "[path to database folder here]"
+ 
+ hint: the database folder in this case is the data\db folder located in this repo.
+ 
  
