@@ -10,20 +10,24 @@
         if($butname == "Audio" OR $butname == "AudioP") {                                           //Whenever the Make File List is
            $cursor = $GLOBALS['col']->find(array('Username' => $user, "Resource Type" => "mp3"));  // called it has an identifying 
             $num1 = $cursor->count();                                                               //parameter which allows me to 
-            echo "<h1> You have ".$num1." mp3s. </h1>";                                              //differentiate the pages.
+                                                          //differentiate the pages.
            
             
             if($butname == "AudioP" AND $num1!=0){
-                
+                echo "<h1 style='margin-left:6%;'> You have ".$num1." mp3s. </h1>";
                 $count = 0;
-                echo "<table>";
+                echo "<table style='width: 88%; margin-left:6%;' >";
                     echo "<form name='playForm' method='POST' action='../MultiLevelPushMenu/player.php' enctype='multipart/form-data'>" ; 
                 foreach ($cursor as $obj) {                   // iterate through the results
                     $filename = $obj['Resource Name'];
                     if(!isset($obj["Packaged"])){
                         echo "<tr>";
-                        echo "<td class='check'><input  type='checkbox' name='ckb' id='ckb".$count."' value='".$filename."' onclick= 'chkcontrol(".$count.")'></td>";
-                        echo "<td class='name'><label class='name2'>".$filename."</lable></td>";
+                        echo "<td class='check'><div class='checkbox checkbox-success'>
+                        <input type='checkbox' class='styled' name='ckb' id='ckb".$count."' value='".$filename."' onclick= 'chkcontrol(".$count.")'>
+                        <label></label>
+                        </div>
+                        </td>";
+                        echo "<td class='name'><label class='name2' style='padding-top:10px;'>".$filename."</lable></td>";
                         $count++;
                     
                     }
@@ -32,7 +36,9 @@
                 
                  echo     "</table>
                             <input type='hidden' name='src' id='src'>
-                            <input class='btn btn-primary' type='submit' name='Aplay' value='Play' style='margin-top: 10px; width:100%'/>
+                             <button class='btn btn-block btn-primary' type='submit' name='Aplay'  style='margin-top:10px; width:88%; margin-left: 6%;'>
+                                    <i class='glyphicon glyphicon-headphones'></i> Select Audio
+                            </button>
                            
                             </form>"; 
                 
@@ -86,8 +92,8 @@
                 // echo $path;
                     echo '<div class="audio-player">
                         <h2>Now Playing: '.$src.'</h2>
-                            <audio id="audio-player" src="'.$path.'" type="audio/mp3" controls="controls"></audio>
-                        </div><!-- @end .audio-player -->';
+                            <audio id="audio-player" src="'.$path.'" type="audio/mp3" style="width:85%;" controls="controls"></audio>
+                        </div>';
                 
                 }
                 
@@ -97,26 +103,11 @@
                     // echo $path2;
                     echo '<div class="audio-player">
                         <h2>Choose mp3</h2>
-                            <audio id="audio-player" src="'.$path2.'" type="audio/mp3" controls="controls"></audio>
-                        </div><!-- @end .audio-player -->';
+                            <audio id="audio-player" src="'.$path2.'" type="audio/mp3" style="width:85%;" controls="controls"></audio>
+                        </div>';
                 
                 }
                 echo '</div>';
-                
-                echo "<script type='text/javascript'>
-                            $(function(){
-                        $('#audio-player').mediaelementplayer({
-                            alwaysShowControls: true,
-                            features: ['playpause','progress','volume'],
-                            audioVolume: 'horizontal',
-                            audioWidth: 450,
-                            audioHeight: 70,
-                            iPadUseNativeControls: true,
-                            iPhoneUseNativeControls: true,
-                            AndroidUseNativeControls: true
-                            });
-                            });
-                        </script>";
                 
                 
                 
@@ -129,14 +120,15 @@
             }
             
             
-        elseif($butname == "Audio" AND $num1 != 0){     // this next section of code is aimed at the organization of the sequencer
+        elseif($butname == "Audio" AND $num1 != 0){ 
+            echo "<h1 style='margin-left:3%;'> You have ".$num1." mp3s. </h1>";// this next section of code is aimed at the organization of the sequencer
             $egval = $num1+1;                             // finds the value of the place holders in the table and it also uses some
                                                   // java script for hidden inputs, which might be like a little cheat, but
                                                     //when things get gloomy it are these nuances that keep me happy. also 
             $row = 1;                               //egval means example value.
              echo "<form name='hope' method='POST' action='../FileHandler/download.php' enctype='multipart/form-data'>" ; 
             
-            echo "<table border=1>";
+            echo "<table border=1 style='width: 94%; margin-left: 3%;'>";
             echo "<tr><td class='check2'> X </td><td class='name3'><label class='name5'>Name of Song (check if wanted)</label></td>
             <td align='center' class='name4'><label class='name5'>Appearance Order Index separated by '-' STARTING FROM 1 </label></td></tr>";                         // the Heading of the sequencing table.
         
@@ -147,7 +139,8 @@
                 if(!isset($obj["Packaged"]) AND $egval ){
                                                             //only the firs row of the table were privileged enough to get two place
                     echo "<tr>";                            //holders instead of one.
-                    echo "<td class='check2'><input type='checkbox' name='filename[]' id='".$row."_1' value='".$filename."' onclick='updatebox1(".$num1.")'></td><td class='name3'><label class='name5'> ".$filename."</label></td>";
+                    echo "<td class='check2'><div class='checkbox checkbox-success'><input type='checkbox' name='filename[]' id='".$row."_1' value='".$filename."' class='styled' onclick='updatebox1(".$num1.")'><label></label></div></td>
+                    <td class='name3'><label class='name5' style='padding-top:10px;'> ".$filename."</label></td>";
                     echo "<td class='name4' align='center'><input type='text' name='".$row."_2' id='".$row."_2' placeholder='".$row."-".$egval."'></td>";
                     echo "</tr>";                           // was thinking of having multiple columns one per repetiton of the 
                     $egval = null;                         // resource, but it didnt look or feel great. At least its a little                                               // better that how it would have looked had we decided to go offline
@@ -155,7 +148,8 @@
             
                 elseif(!isset($obj["Packaged"]) AND (!$egval) ){
                     echo "<tr>";                            //holders instead of one.
-                    echo "<td class='check2'><input type='checkbox' name='filename[]' id='".$row."_1' value='".$filename."' onclick='updatebox1(".$num1.")'></td><td class='name3'><label class='name4'> ".$filename."</label></td>";
+                    echo "<td class='check2'><div class='checkbox checkbox-success'><input type='checkbox' name='filename[]' id='".$row."_1' value='".$filename."' class='styled' onclick='updatebox1(".$num1.")'><label></label></div></td>
+                    <td class='name3'><label class='name4' style='padding-top:10px;'> ".$filename."</label></td>";
                     echo "<td class='name4' align='center'><input type='text' name='".$row."_2' id='".$row."_2' placeholder='".$row."'></td>";
                     echo "</tr>";  
                 }
@@ -167,11 +161,12 @@
                                     // of the webpage the whole time.
             echo "<div class='row'>";
             echo "<div class='col-sm-6 input'>";
+            echo "<div style='width: 88%; margin-left: 6%;'>";
             echo "<label for='seqMp3Title'>Insert Name for sequenced MP3 &nbsp;</label>";
             echo "<input type='text' name='seqMp3Title' id='seqMp3Title' required>";
             echo "</div>";
+            echo "</div>";
             
-            echo "<div class='col-sm-6 input'>";
             echo "<input type='hidden' name='map' id='map'>";    // this is really like a hidden map, without this I wouldnt find the 
                                                                 //treasure.
             
@@ -220,8 +215,16 @@
                   </script>";  //this javascript was to esure the updating of my treasuremap whenever a different resource was
                                //chose to be sequenced. And to validate the ordered fields to ensure that the users fill in all
                                 // the correct information.
-                   echo     "<input class='btn btn-primary' type='submit' name='ADsequence' value='Download Sequence' />
-                            <input class='btn btn-primary' type='submit' name='ASsequence' value='Save Sequence' />
+                   echo     "
+                             <div class='col-sm-2 input'>
+                                <button class='btn btn-block btn-primary' type='submit' name='ADsequence'>
+                                    <i class='glyphicon glyphicon-download-alt'></i> Download Audio
+                                </button>
+                            </div>
+                            <div class='col-sm-2 input'>
+                              <button class='btn btn-block btn-primary' type='submit' name='ASsequence'>
+                                    <i class='glyphicon glyphicon-floppy-disk'></i> Save Audio
+                                </button>
                             </form>";
             echo "</div>";
             echo "</div>";
@@ -264,13 +267,13 @@
                 echo  '<div class="col-sm-6">';
             echo "<h1 style='text-align: center'> You have ".$num." Raw files. </h1>";
                 echo "<form name='seq' method='POST' action='../FileHandler/download.php' enctype='multipart/form-data'>" ;  
-                echo "<table>";
+                echo "<table style='width: 92%; margin-left: 5%;'>";
                 foreach ($cursor as $obj) {                   // iterate through the results
                     $filename = $obj['Resource Name'];
                     if(!isset($obj["Packaged"]) AND !isset($obj["Orchestrated"])){
                         echo "<tr>";
-                        echo "<td class='check'><label><input type='checkbox' name='filename[]' value='".$filename."'></label></td>";
-                        echo "<td class='name'><label class='name2'> ".$filename."</label></td>";
+                        echo "<td class='check'><div class='checkbox checkbox-success'><input type='checkbox' name='filename[]' clss='styled' value='".$filename."'><label></label><div></td>";
+                        echo "<td class='name'><label class='name2' style='padding-top:10px;'> ".$filename."</label></td>";
                         echo "</tr>";
                     
                     }
@@ -280,15 +283,15 @@
                 echo "</div>";
                 echo "<div class='col-sm-6'>";
                 echo "<h1 style='text-align: center;'> You have ".$num1." Orchestrated files. </h1>";
-                 echo "<table>";
+                 echo "<table style='width: 92%; margin-left: 3%;'>";
                 foreach ($cursor2 as $obj) {                   // iterate through the results
                     $filename = $obj['Resource Name'];
         
                     if(isset($obj["Orchestrated"])){
 
                        echo "<tr>";
-                        echo "<td class='check'><label><input type='checkbox' name='filename[]' value='".$filename."'></label></td>";
-                        echo "<td class='name'><label class='name2'>".$filename."</label></td>";
+                        echo "<td class='check'><div class='checkbox checkbox-success'><input type='checkbox' class='styled' name='filename[]' value='".$filename."'><label></label></div></td>";
+                        echo "<td class='name'><label class='name2' style='padding-top:10px;'>".$filename."</label></td>";
                         echo "</tr>";
                     }
                 }
@@ -336,21 +339,22 @@
                elseif($butname == "Video" OR $butname == "VideoP") {                                           //Whenever the Make File List is
            $cursor = $GLOBALS['col']->find(array('Username' => $user, "Resource Type" => "mp4"));  // called it has an identifying 
             $num = $cursor->count();                                                               //parameter which allows me to 
-            echo "<h1> You have ".$num." mp4s. </h1>";                                              //differentiate the pages.
+                                                        //differentiate the pages.
            
             
          
             
-        if($butname == "Video" AND $num != 0){     // this next section of code is aimed at the organization of the sequencer
+        if($butname == "Video" AND $num != 0){
+             echo "<h1 style='margin-left:3%'> You have ".$num." mp4s. </h1>"; // this next section of code is aimed at the organization of the sequencer
             $egval = $num+1;                             // finds the value of the place holders in the table and it also uses some
                                                   // java script for hidden inputs, which might be like a little cheat, but
                                                     //when things get gloomy it are these nuances that keep me happy. also 
             $row = 1;                               //egval means example value.
              echo "<form name='hope' method='POST' action='../FileHandler/download.php' enctype='multipart/form-data'>" ; 
             
-            echo "<table border=1>";
+            echo "<table border=1 style='width: 94%; margin-left: 3%'>";
             echo "<tr><td class='check2'>X</td><td class='name3'><label class='name5'>Name of Video (check if wanted)</label></td>
-            <td align='center' class='name4'><label class='name5'>Appearance Order Index separated by '-' STARTING FROM 1 </label></td></tr>";                         // the Heading of the sequencing table.
+            <td align='center' class='name4'><label class='name5' style='padding-top:10px;'>Appearance Order Index separated by '-' STARTING FROM 1 </label></td></tr>";                         // the Heading of the sequencing table.
         
             foreach ($cursor as $obj) {                   // iterate through the results
             
@@ -359,7 +363,8 @@
                 if(!isset($obj["Packaged"]) AND $egval ){
                                                             //only the firs row of the table were privileged enough to get two place
                     echo "<tr>";                            //holders instead of one.
-                    echo "<td class='check2'><input type='checkbox' name='filename2[]' id='".$row."_12' value='".$filename."' onclick='updatebox(".$num.")'/></td><td class='name3'><label class='name5'>".$filename."</label></td>";
+                    echo "<td class='check2'><div class='checkbox checkbox-success'><input type='checkbox' class='styled' name='filename2[]' id='".$row."_12' value='".$filename."' onclick='updatebox(".$num.")'/><label></label></div></td>
+                    <td class='name3'><label class='name5' style='padding-top:10px;'>".$filename."</label></td>";
                     echo "<td align='center' class='name4'><input type='text' name='".$row."_22' id='".$row."_22' placeholder='".$row."-".$egval."'></td>";
                     echo "</tr>";                           // was thinking of having multiple columns one per repetiton of the 
                     $egval = null;                         // resource, but it didnt look or feel great. At least its a little                                               // better that how it would have looked had we decided to go offline
@@ -367,7 +372,8 @@
             
                 elseif(!isset($obj["Packaged"]) AND (!$egval) ){
                     echo "<tr>";
-                    echo "<td class='check2'><input type='checkbox' name='filename2[]' id='".$row."_12' value='".$filename."' onclick='updatebox(".$num.")'/></td><td class='name3'><label class='name5'>".$filename."</label></td>";
+                    echo "<td class='check2'><div class='checkbox checkbox-success'><input type='checkbox' class='styled' name='filename2[]' id='".$row."_12' value='".$filename."' onclick='updatebox(".$num.")'/><label></label></div></td>
+                    <td class='name3'><label class='name5' style='padding-top:10px;'>".$filename."</label></td>";
                     echo "<td align='center' class='name4'><input type='text' name='".$row."_22' id='".$row."_22' placeholder='".$row."'></td>";
                     echo "</tr>";
                 }
@@ -380,12 +386,13 @@
             
             echo "<div class='row'>";
             echo "<div class='col-sm-6'>";
-            echo "<label class='input' for='seqMp3Title'>Insert Name for sequenced MP4 &nbsp;</label>";
+            echo "<div style='width: 88%; margin-left: 6%;'>";
+            echo "<label class='input' for='seqMp4Title'>Insert Name for sequenced MP4 &nbsp;</label>";
             echo "<input type='text' name='seqMp4Title' id='seqMp4Title' required><br>";
+            echo "</div>";
             echo "</div>";
             echo "<input type='hidden' name='map2' id='map2'>";    // this is really like a hidden map, without this I wouldnt find the 
                                                                 //treasure.
-            echo "<div class='col-sm-6 input'>";
             echo "<script>               
                     var textbox = document.getElementById('map2');
                                                                         
@@ -429,8 +436,16 @@
                   </script>";  //this javascript was to esure the updating of my treasuremap whenever a different resource was
                                //chose to be sequenced. And to validate the ordered fields to ensure that the users fill in all
                                 // the correct information.
-                   echo     "<input  class='btn btn-primary' type='submit' name='VDsequence'  value='Download Sequence' />
-                            <input  class='btn btn-primary' type='submit' name='VSsequence' value='Save Sequence' />
+                   echo     "
+                                <div class='col-sm-2 input'>
+                                <button class='btn btn-block btn-primary' type='submit' name='VDsequence'>
+                                    <i class='glyphicon glyphicon-download-alt'></i> Download Video
+                                </button>
+                                </div>
+                                <div class='col-sm-2 input'>
+                                <button class='btn btn-block btn-primary' type='submit' name='VSsequence'>
+                                    <i class='glyphicon glyphicon-floppy-disk'></i> Save Video
+                                </button>
                             </form>";
             echo "</div>";
                        
@@ -445,20 +460,33 @@
                                 change: function() {
                                         this.value = this.value.replace(/\s/g, "");
                                     }
-                            });</script>';  
+                            });
+                    $(".name4").on({
+                        keydown: function(e) {
+                            if (e.which !== 48 && e.which !== 49 && e.which !== 50 && e.which !== 51 && e.which !== 52 && e.which !== 53 && e.which !== 54 && e.which !== 55 && e.which !== 56 && e.which !== 57 && e.which !== 45 && e.which !== 8 && e.which !== 46 && e.which !== 43 && e.which !== 189){
+                                alert("Please only use numbers and hyphens.");
+                                return false;
+                                }
+                        },
+                                change: function() {
+                                        this.value = this.value.replace(/\s/g, "");
+                                    }
+                            });</script>'; 
+            
             }
             
                      elseif($butname == "VideoP" AND $num!=0){
+                          echo "<h1 style='margin-left:6%'> You have ".$num." mp4s. </h1>"; 
                 $count = 0;
-                         echo "<table>";
-                                echo "<form name='playForm1' method='POST' action='../MultiLevelPushMenu/player.php' enctype='multipart/form-data'>" ; 
+                         echo "<table style='width: 88%; margin-left: 6%;'>";
+                                echo "<form name='playForm1' method='POST' action='../MultiLevelPushMenu/player.php#bottom' enctype='multipart/form-data'>" ; 
                 foreach ($cursor as $obj) {                   // iterate through the results
                     $filename = $obj['Resource Name'];
                     if(!isset($obj["Packaged"])){
                       
                         echo "<tr>";
-                        echo "<td class='check'><input type='checkbox' name='ckb1' id='ckb1".$count."' value='".$filename."' onclick= 'chkcontrol1(".$count.")'></td>
-                        <td class='name'><label class='name2'>".$filename."</label></td>";
+                        echo "<td class='check'><div class='checkbox checkbox-success'><input type='checkbox' class='styled' name='ckb1' id='ckb1".$count."' value='".$filename."' onclick= 'chkcontrol1(".$count.")'><label></label></div></td>
+                        <td class='name'><label class='name2' style='padding-top:10px;'>".$filename."</label></td>";
                         echo "<tr>";
                         $count++;
                     
@@ -467,7 +495,9 @@
                 }
                     echo "</table>";
                  echo     " <input type='hidden' name='src1' id='src1'>
-                            <input class='btn btn-block btn-primary' type='submit' name='Vplay' value='Play Video' style='margin-top:10px;' />
+                            <button class='btn btn-block btn-primary' type='submit' name='Vplay'  style='margin-top:10px; width:88%; margin-left: 6%;'>
+                                    <i class='glyphicon glyphicon-film'></i> Select Video
+                                </button>
                             </form>
                             </div>";  
                 
@@ -575,8 +605,8 @@
 
             if(isset($obj["Packaged"])){
                  echo "<tr>";
-                echo "<td class='check'><label><input type='checkbox' name='filename[]' value='".$filename."'></label></td>";
-                echo "<td class='name'><label class='name2'>".$filename."</label></td>";
+                echo "<td class='check'><div class='checkbox checkbox-success'><input type='checkbox' class='styled' name='filename[]' value='".$filename."'><label></label></div></td>";
+                echo "<td class='name'><label class='name2' style='padding-top:10px;'>".$filename."</label></td>";
                 echo "</tr>";
             }
 
@@ -604,7 +634,15 @@
                         <i class='glyphicon glyphicon-trash'></i> Delete
                         </button>
                 </div>
-                </form>";  
+                </form>
+                </div>
+                <div class='row'>
+                <div class='col-sm-3'></div>
+                <div class='col-sm-6'>
+                <a href='../index.php' style='text-decoration: none;'><button class='btn btn-block btn-primary' style='margin-bottom: 15px; margin-top: -5px;' name='ReVO' ;'>
+                        <i class='glyphicon glyphicon-search'></i> Search Shared Packages on ReVO
+                        </button></a>
+                </div>";  
 
         }
         else{

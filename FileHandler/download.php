@@ -1,6 +1,7 @@
 <?php
     require 'dbHandler.php';
     require 'phpmp3.php';
+    require 'mydb.php';
 
     $col = $database->ResourcesTest;
 
@@ -145,11 +146,29 @@ if (headers_sent()) {
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script src="js/modernizr.custom.js"></script>
         <script src="js/jquery-1.10.2.min.js"></script>
+        <style>
+            .container > header > span span:hover:before {
+                    content: attr(data-content);
+                    text-transform: none;
+                    text-indent: 0;
+                    letter-spacing: 0;
+                    font-weight: 300;
+                    font-size: 110%;
+                    padding: 0.8em 1em;
+                    line-height: 1.2;
+                    text-align: left;
+                    left: auto;
+                    margin-left: 4px;
+                    position: absolute;
+                    color: #00b36b !important;
+                    background: #000 !important;
+                }
+        </style>
 	</head>
 	<body>
 		<div class="container">
 			<header class="clearfix">
-				<span>RVOA <span class="bp-icon bp-icon-about" data-content="The Blueprints are a collection of basic and minimal website concepts, components, plugins and layouts with minimal style for easy adaption and usage, or simply for inspiration."></span></span>
+				<span>ReVO-App <span class="bp-icon bp-icon-about" data-content="Please fill out all the fields of this form pertaining to the educational package which you are constructing. Please be as detailed as possible. Don\'t forget, you can share your package with other educators on ReVO, just select a package in the \'My Files\' tab and click share."></span></span>
 				<h1>Metadata Capturing Form</h1>
 			</header>	
 			<div class="main">
@@ -186,32 +205,49 @@ if (headers_sent()) {
                             <option>Text</option>
 	  					</select>
 	  					<label for="coverage">Educational Curriculum Followed</label>
-	  					<input type="text" id="coverage" name="coverage" placeholder="CAPS..." required>
+	  					<select id="coverage" name="Coverage">
+	  						<option>Choose a Curriculum</option>
+                            <option>ACE</option>
+                            <option>IEB</option>
+                            <option>OBE</option>
+                            <option>CAPS</option>
+                            <option>Ambleside</option>
+                            <option>Cambridge</option>                  
+	  					</select>
+                        
                         <label for="relations">Related Topics</label>
 	  					<input type="text" id="relations" name="relations" placeholder="Similar or related work..." required>
 	  					
 	  				</div>
 	  				<div class="cbp-mc-column">
 	  					<label>Subject</label>
-	  					<select id="subject" name="subject" required>
+	  				<select id="subject" name="subject">
 	  						<option>Choose a Subject</option>
-	  						<option>Mathematics</option>
-	  						<option>English</option>
-	  						<option>Afrikaans</option>
-                            <option>French</option>
-                            <option>German</option>
                             <option>Accounting</option>
-                            <option>Physical Sciences</option>
-                            <option>Life Sciences</option>
+                            <option>Afrikaans</option>
+                            <option>Art</option>
+                            <option>Biology</option>
                             <option>Chemistry</option>
-                            <option>History</option>
-                            <option>Geography</option>
-                            <option>Life Orientation</option>
+                            <option>Computer Science</option>
+                            <option>Drama</option>
                             <option>Engineering Graphics & Design</option>
+                            <option>English</option>
+                            <option>French</option>
+                            <option>Geography</option>
+                            <option>German</option>
+                            <option>History</option>
+                            <option>Information Technology</option>
+                            <option>Language</option>
+                            <option>Life Orientation</option>
+                            <option>Life Science</option>
+	  						<option>Mathematics</option>
+                            <option>Music</option>
+	  						<option>Physical Education</option>
+	  						<option>Physical Science</option>                    
 	  					</select>
 						
 	  					<label for="comments">Comments</label>
-	  					<textarea id="comments" name="comments" placeholder="Feel free to add a short comment here..." required></textarea>	
+	  					<textarea id="comments" name="comments" placeholder="How should the lesson be conducted?" required></textarea>	
 	  				</div>
 	  				<div class="cbp-mc-submit-wrap"><input class="cbp-mc-submit" type="submit" name="submit" value="Send your data" /></div>
 				</form>
@@ -306,11 +342,8 @@ if (headers_sent()) {
         
     $xml=simplexml_load_file($mani);
     $myfile = file_get_contents($mani);
-    $arr1 = explode(' ', $myfile);
-    $arr2 = explode('/', $arr1[90+$spaceCount]);
-    $PID = $arr2[1];
-   // $URL = substr($arr2[2], 0, -1);
-   $URL = $pName = $xml->entry[1]->content->children('oai_dc', true)->children('dc', true)->title;
+    $PID = $xml->entry[1]->content->children('oai_dc', true)->children('dc', true)->identifier;
+    $URL= $pName = $xml->title;
     $pSubject = $xml->entry[1]->content->children('oai_dc', true)->children('dc', true)->subject;
     $pDes = preg_replace('/\n|\r/', ' ', $xml->entry[1]->content->children('oai_dc', true)->children('dc', true)->description);
     $pDes = str_replace("'", "\'", $pDes);
@@ -358,7 +391,22 @@ window.location.href='../MultiLevelPushMenu/myFiles.php';
 </script>";
               
 }
+ 
+     $pLoc = $xml->entry[1]->content->children('oai_dc', true)->children('dc', true)->creator . '/imsmanifest.xml';
+        $checkExist = "select packageName, packageSubject, packageLocation from package where packageName like '$pName' and packageSubject like '$pSubject'
+and packageLocation like '$pLoc' limit 1";
+    $runExist = mysqli_query($conn, $checkExist);
+    if (mysqli_num_rows($runExist) == 0) {
+        $insertData = "INSERT INTO package (packagePID, packageUrl, packageName, packageSubject, packageDescription, packageLocation, packageDate, packageLikes, packageDislikes, packageComments)
+VALUES ('$PID', '$URL', '$pName', '$pSubject', '$pDes', '$pLoc', date(now()), '', '', '')";
+        $result = mysqli_query($conn, $insertData);
+
+        if (!$result) {
+            die('Invalid query: ' . mysqli_error());
+        }
+    } 
 }
+        
 
     elseif (isset($_POST['ADsequence']) OR isset($_POST['ASsequence'])){
         $email = $_SESSION['email'];

@@ -8,13 +8,33 @@ if(!isset($_SESSION["name"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>do-OER: My Files</title>
+  <title>ReVO-App: My Files</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/build.css">
     <link rel="stylesheet" href="css/update.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="img/stack-of-paperbacks-152-38869.png">
+    
+    <style>
+        .checkbox:hover {
+    cursor: pointer !important;
+}
+.checkbox-success:hover{
+    cursor: pointer !important;
+}
+
+.checkbox.checkbox-success:hover{
+    cursor: pointer !important;
+} 
+    </style>
+    
+    
+    
     <script>
       
             $(function() {
@@ -58,7 +78,7 @@ if(!isset($_SESSION["name"])){
 </head>
 <body>
 <div class="jumbotron text-center headerBack">
-  <h1 class="title">Pack Master</h1>
+  <h1 class="title">ReVO-App</h1>
   <p class="title">Work Together, Share Together</p> 
 </div> 
 <nav class="navbar navbar-inverse">
@@ -84,9 +104,11 @@ if(!isset($_SESSION["name"])){
   </div>
 </nav>
   
-<div class="container" style="background-color: white; border-radius: 15px;">
+<div class="container" style="background-color:rgba(250,240,217,0.8); border-radius: 15px;">
     <div class='row'>
-        <h1 style="text-align: center;">Upload Files</h1>
+        
+         <h1 style="text-align: center;">Upload Files<span data-toggle="tooltip" data-placement="right" title="This is where you come to manage all your resources. Here you can upload raw resources, download multiple resources (including ones you have packaged already), package both raw and orchestrated resources and also you can share your packaged resources on to ReVO by selecting a package and clicking share."> <small><span class="glyphicon glyphicon-info-sign"></span></small></span></h1>
+    
     </div>
     
   <div class="row input">
@@ -127,7 +149,7 @@ if(!isset($_SESSION["name"])){
     
         </div>
     </div>
-    <div class="container input" style="background-color: white; border-radius: 15px;"  >
+    <div class="container input" style="background-color:rgba(250,240,217,0.8); border-radius: 15px;"  >
     <div class="row">
         <div class="col-sm-3">
       </div>
@@ -140,6 +162,12 @@ if(!isset($_SESSION["name"])){
 
         </div>
     </div>
+    
+    <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 
 </body>
 </html>

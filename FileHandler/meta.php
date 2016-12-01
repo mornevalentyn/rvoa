@@ -75,19 +75,27 @@
 	  					<label>Subject</label>
 	  					<select id="subject" name="subject">
 	  						<option>Choose a Subject</option>
-	  						<option>Mathematics</option>
-	  						<option>English</option>
-	  						<option>Afrikaans</option>
-                            <option>French</option>
-                            <option>German</option>
                             <option>Accounting</option>
-                            <option>Physical Sciences</option>
-                            <option>Life Sciences</option>
+                            <option>Afrikaans</option>
+                            <option>Art</option>
+                            <option>Biology</option>
                             <option>Chemistry</option>
-                            <option>History</option>
-                            <option>Geography</option>
-                            <option>Life Orientation</option>
+                            <option>Computer Science</option>
+                            <option>Drama</option>
                             <option>Engineering Graphics & Design</option>
+                            <option>English</option>
+                            <option>French</option>
+                            <option>Geography</option>
+                            <option>German</option>
+                            <option>History</option>
+                            <option>Information Technology</option>
+                            <option>Language</option>
+                            <option>Life Orientation</option>
+                            <option>Life Science</option>
+	  						<option>Mathematics</option>
+                            <option>Music</option>
+	  						<option>Physical Education</option>
+	  						<option>Physical Science</option>                    
 	  					</select>
 						
 	  					<label for="comments">Comments</label>
